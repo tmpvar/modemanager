@@ -45,7 +45,6 @@ ModeManager.prototype.handle = function(type, event) {
   }
 }
 
-
 ModeManager.prototype.update = function(delta) {
 
   if (this._modes[this._mode] && typeof this._modes[this._mode].update === 'function') {
@@ -56,3 +55,9 @@ ModeManager.prototype.update = function(delta) {
     this._modes[this._defaultMode].update(delta);
   }
 };
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = ModeManager;
+} else {
+  window.ModeManager = ModeManager;
+}
