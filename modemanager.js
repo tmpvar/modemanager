@@ -25,7 +25,17 @@ ModeManager.prototype.mode = function(mode, options) {
     }
   }
 
-  return this._mode;
+  return this._mode || this.defaultMode || null;
+};
+
+ModeManager.prototype.exit = function() {
+  if (this._mode && typeof this.modes[this._mode].deactivate === 'function') {
+    this.modes[this._mode].deactivate(null);
+  }
+
+  this._mode = null;
+
+  return this;
 };
 
 ModeManager.prototype.add = function(name, obj, isDefault) {

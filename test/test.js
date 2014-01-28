@@ -128,6 +128,22 @@ describe('modemanager', function() {
     });
   });
 
+  describe('#exit', function() {
+    it('should exit the current mode and return to default', function() {
+      var out = '';
+      var m =(new ModeManager()).add('test', {
+        deactivate : function() {
+          out += 'd';
+        }
+      }).add('abc', true, true);
+
+      m.mode('test');
+      ok(m.exit() === m);
+      ok(out === 'd');
+      ok(m.mode() === 'abc');
+    });
+  });
+
   describe('#update', function() {
     it('should chain', function() {
       var m = new ModeManager();
